@@ -1,0 +1,159 @@
+<!DOCTYPE html> 
+<html lang='en'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            margin-left:-5px;
+            margin-right:-5px;
+        }
+        html {
+            background-color:  #f5f5f5;
+            text-align: center;
+        }
+        #container{
+            text-align:center;
+            padding-top: 40px;
+        }
+        .column {
+            float: left;
+            width: 50%;
+            padding: 5px;
+        }
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .input{
+            font-size: 25px;
+            font-weight: bold;
+            margin: 20px;
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 50px auto;
+            padding-left: 50px;
+
+        } 
+        table, th, td{
+            border: 1.5px solid ;
+            padding: 5px;
+        }
+        th{
+            font-size: 20px;
+            font-weight: bold;
+            background-color: rgba(29,150,178,1);
+            border: 1px solid rgba(29,150,178,1);
+            text-align: center;
+            color: white;
+        }
+        td{
+            font-size: 20px;
+            border: 0.5px solid rgb(54, 120, 206);
+        }
+        tr td {
+            background: #f1f1f1 url(https://jackrugile.com/images/misc/noise-diagonal.png);	
+        }
+              
+    </style>
+
+    <head>
+        <title>get details</title>
+    </head>
+
+    <form id='form'  action="/add" method="POST" >
+        {% csrf_token %}
+
+        <h1 style="margin: 50px; color: darkblue; font-weight: 900px;">Port Capacity Management System </h1>
+
+        <div id='container'>
+            <div class="input" >Number of ports<input type='number' id="np" name='np' min='0' size="50" style="margin-left: 20px;"oninput="port()" required> </div>
+            <div class="input" >Number of type of ships<input id="ns" name='ns' min='0' size="20" style="margin-left: 15px;"oninput="ship()" required> </div>
+        </div>
+
+        <div class='row'>
+            <div class='column'>
+                <div id = 'port_heading' style="padding-top: 15px;padding-bottom: 15px;"></div>
+                <table id="display"> </table>
+            </div>
+
+            <div class='column'>
+                <div id = 'ship_heading' style="padding-top: 50px;padding-bottom: 15px;"></div>
+                <table id="display1" > </table>
+            </div>
+        </div>
+
+        <div style="text-align-last:center;" class='col' >
+            <button type="submit" form="form"  style="height: 30px;" >Submit</button>
+        </div>
+
+        <script>
+            let table=document.getElementById("display");
+            let table1=document.getElementById("display1");
+            let ph=document.getElementById("port_heading");
+            let sh =document.getElementById("ship_heading")
+
+            function port() {
+                    var np = document.getElementById("np").value;
+                    if (!np ){
+                        alert("Please fill np");
+                        return;
+                    }
+                    ph.innerHTML=`<h2 style="text-align:center ; margin-top: 50px;"> PORTS </h1>`
+                    let template=`
+                                    <tr>
+                                        <th>Name</th>
+                                    </tr>`
+                    table.innerHTML =template;
+                    for (i=0;i<np;i++){
+                    let template = `
+                                    <tr class="inp">
+                                        <td> <select name="p`+i+`_name"  style="height: 30px; width: 250px" required>
+                                                <option value="" disabled selected hidden>Please Choose...</option>
+                                                <option value='port_1'>port 1</option>
+                                                <option value='port_2'>port 2</option>
+                                            </select>
+                                        </td>
+                                    </tr>`;
+                    table.innerHTML +=template;
+                }
+                };
+                function ship() {
+                    var ns = document.getElementById("ns").value;
+                    if (!np ){
+                        alert("Please fill ns");
+                        return;
+                    }
+                    sh.innerHTML=`<h2 style="text-align:center ;  margin-top: 20px;"> SHIPS</h2>`
+                    let template=`
+                                <tr>
+                                    <th>Name</th>
+                                </tr>`
+
+                    table1.innerHTML =template;
+                    for (i=0;i<ns;i++){
+                    let template = `
+                                    <tr class="inp">
+                                        <td> <select name="s`+i+`_type"  style="height: 30px;width: 250px" required>
+                                                <option value="" disabled selected hidden>Please Choose...</option>
+                                                <option value='ship_1'>ship 1</option>
+                                                <option value='ship_2'>ship 2</option>
+                                            </select>
+                                        </td>
+                                    </tr>`;
+
+                    table1.innerHTML +=template;
+                }
+                };
+            
+        </script>
+    </form>
+</html>
+
+
+
+

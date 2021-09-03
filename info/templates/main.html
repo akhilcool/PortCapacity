@@ -1,0 +1,35 @@
+{% load static %}
+<html>
+  <style>
+    .hd{
+      margin-top:15px;
+      padding-top: 70px;
+      padding-bottom:0px;
+      font-size: 46px;
+      text-align: center;
+    }
+    .tr{
+      font-size:50px;
+    }
+    
+    body{
+      width: 100%;height: 100%;background-size: cover;
+      background-image: url('{% static "Images\port_pic1.jpg" %}');
+      
+    }
+    
+  </style>
+
+<!---->
+<h1 class='hd'>Port Management System</h1>
+
+<body>
+  <div style="text-align: center;margin-top: 0px;padding-top: 30px;">
+      <a href="http://127.0.0.1:8000/optimization/" style="font-size: 30px;"> Port Optimization</a><br>
+      <a href="http://127.0.0.1:8000/efficiency/"   style="font-size: 30px;">Efficiency Analysis</a><br>
+      <a href="http://127.0.0.1:8000/management/" style="font-size: 30px;">Capacity Management</a><br>
+      <a href="http://127.0.0.1:8000/performance/" style="font-size: 30px;"> Performance Visualization</a><br>
+    </table>
+  </div>
+</body>
+</html>
